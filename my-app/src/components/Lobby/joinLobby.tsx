@@ -20,7 +20,7 @@ type LobbyJoinState = {
     loading: boolean;
 };
 
-export class joinLobby extends React.Component<LobbyProps, LobbyJoinState> {
+export class JoinLobby extends React.Component<LobbyProps, LobbyJoinState> {
     state = {
         lobby: "",
         lobbyResponse: null,
@@ -33,7 +33,7 @@ export class joinLobby extends React.Component<LobbyProps, LobbyJoinState> {
         const { onEnterLobby } = this.props;
         const { lobby} = this.state;
 
-        const result = await api.joinLobby(lobby);
+        const result = await api.JoinLobby(lobby);
 
         if (result.status === "success") {
             onEnterLobby(result.value);
@@ -69,7 +69,7 @@ export class joinLobby extends React.Component<LobbyProps, LobbyJoinState> {
                         isLoading={this.state.loading}
                         onClick={() => this.onSubmit()}
                     >
-                        Sign in
+                        Enter
                     </Button>
                 </form>
             </Box>

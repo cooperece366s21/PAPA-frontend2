@@ -6,7 +6,7 @@ function getCurrentUserId(): string {
 }
 
 function setCurrentUser(user: User): void {
-    localStorage.setItem("papa", user.id);
+    localStorage.setItem("papauser", user.id);
 }
 
 export type User = {
@@ -37,7 +37,7 @@ function getCurrentLobbyId(): string {
 }
 
 function setCurrentLobby(lobby: Lobby): void {
-    localStorage.setItem("papa", lobby.id);
+    localStorage.setItem("papalobby", lobby.id);
 }
 
 export type Lobby = {
@@ -69,7 +69,7 @@ export function initLobby(): Promise<Lobby> {
 
     return fetch(`${BACKEND_URL}/${lobbyID}/init`, {
         headers: {
-            papaLobby: lobbyID
+            papalobby: lobbyID
         }
     })
         .then(response => {
@@ -82,28 +82,6 @@ export function initLobby(): Promise<Lobby> {
         .catch(err => {
             throw new Error("something went wrong intializing the lobby" + err.message);
         });
-}
-
-export async function joinLobby(
-    code: string,
-): Promise<Result<Lobby>> {
-    const response = await fetch(`${BACKEND_URL}/lobby/${code}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ code })
-    });
-
-    if (response.ok) {
-        let lobby: Lobby = await response.json();
-        //setCurrentUser(user);
-        setCurrentLobby(lobby);
-        return { value: lobby, status: "success" };
-    } else {
-        return { error: response.status.toString(), status: "failure" };
-    }
 }
 
 // export type Resturaunt = {
@@ -208,11 +186,44 @@ export async function logout() {
     return false;
 }
 
+export async function JoinLobby(
+    code: string,
+): Promise<Result<Lobby>> {
+    const response = await fetch(`${BACKEND_URL}/joinLobby`, {
+        method: "Post",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ code })
+    });
+
+    if (response.ok) {
+        let lobby: Lobby = await response.json();
+        //setCurrentUser(user);
+        setCurrentLobby(lobby);
+        return { value: lobby, status: "success" };
+    } else {
+        return { error: response.status.toString(), status: "failure" };
+    }
+}
+
+export async function LeaveLobby() {
+    await fetch(`${BACKEND_URL}/leaveLobby`, {
+        method: "POST",
+        headers: {
+            papalobby: getCurrentLobbyId()
+        }
+    });
+    return false;
+}
+
 let exports = {
     getCurrentUser,
     //getFeed,
     getCurrentLobby,
-    joinLobby,
+    JoinLobby,
+    LeaveLobby,
     logout,
     login
 };

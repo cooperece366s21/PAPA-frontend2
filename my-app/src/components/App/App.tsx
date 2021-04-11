@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import api, { User } from "../../services/api";
+import api, { User,Lobby } from "../../services/api";
 import { Login } from "../Login/Login";
-import { joinLobby } from "../Lobby/joinLobby";
+import { JoinLobby } from "../Lobby/joinLobby";
 import { Logout } from "../Logout/Logout";
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
@@ -10,14 +10,17 @@ import { Box, Heading, Stack } from "@chakra-ui/react";
 // props ~ inputs that don't change
 // state ~ internal and can change
 type AppProps = {};
-type AppState = { user: User | null };
+type AppState = { user: User | null, lobby: Lobby |null};
 
 class App extends React.Component<AppProps, AppState> {
-  state: AppState = { user: null };
+  state: AppState = { user: null , lobby: null};
 
   async componentDidMount() {
     const currentUser = await api.getCurrentUser();
     this.setState({ user: currentUser });
+
+    const currentLobby = await api.getCurrentLobby();
+    this.setState({ lobby: currentLobby});
   }
 
   render() {
@@ -39,15 +42,24 @@ class App extends React.Component<AppProps, AppState> {
                 <Box>
                   <span>Hello {user.name}</span>
                   <Logout onLoggedOut={() => this.setState({ user: null })} />
+                  <JoinLobby onEnterLobby={() => this.setState({ })} />
+
                   {/*<UserFeed />*/}
+
                 </Box>
 
             )}
           </Box>
 
-            <Box>
+            {/*<Box>*/}
 
-            </Box>
+            {/*    <Box>*/}
+            {/*        <span>Enter Lobby Code: </span>*/}
+            {/*        <JoinLobby onEnterLobby={() => this.setState({ })} />*/}
+            {/*        <UserFeed />*/}
+            {/*    </Box>*/}
+
+            {/*</Box>*/}
         </Box>
     );
   }
