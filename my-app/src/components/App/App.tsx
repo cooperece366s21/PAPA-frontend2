@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import api, { User } from "../../services/api";
 import { Login } from "../Login/Login";
+import { joinLobby } from "../Lobby/joinLobby";
 import { Logout } from "../Logout/Logout";
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
@@ -28,7 +29,7 @@ class App extends React.Component<AppProps, AppState> {
               PAPA
             </Heading>
             <Heading as="h2" size="2xl">
-              SLOGAN
+              TEST
             </Heading>
           </Stack>
           <Box>
@@ -40,8 +41,13 @@ class App extends React.Component<AppProps, AppState> {
                   <Logout onLoggedOut={() => this.setState({ user: null })} />
                   {/*<UserFeed />*/}
                 </Box>
+
             )}
           </Box>
+
+            <Box>
+
+            </Box>
         </Box>
     );
   }

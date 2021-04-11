@@ -1,11 +1,12 @@
 export const BACKEND_URL = "http://localhost:4567";
 
+//USER STUFF
 function getCurrentUserId(): string {
-    return localStorage.getItem("PAPAuser") || "";
+    return localStorage.getItem("papauser") || "";
 }
 
 function setCurrentUser(user: User): void {
-    localStorage.setItem("PAPA", user.id);
+    localStorage.setItem("papa", user.id);
 }
 
 export type User = {
@@ -18,7 +19,7 @@ export type User = {
 async function getCurrentUser(): Promise<User | null> {
     let response = await fetch(`${BACKEND_URL}/me`, {
         headers: {
-            PAPAuser: getCurrentUserId()
+            papauser: getCurrentUserId()
         }
     });
 
@@ -29,6 +30,101 @@ async function getCurrentUser(): Promise<User | null> {
         return await response.json();
     }
 }
+
+//LOBBY stuff
+function getCurrentLobbyId(): string {
+    return localStorage.getItem("papalobby") || "";
+}
+
+function setCurrentLobby(lobby: Lobby): void {
+    localStorage.setItem("papa", lobby.id);
+}
+
+export type Lobby = {
+    id: string;
+    code: string;
+    restaurant_maps: Array<string>
+};
+
+async function getCurrentLobby(): Promise<Lobby | null> {
+
+    let lobbyID = getCurrentLobbyId();
+
+    let response = await fetch(`${BACKEND_URL}/lobby/${lobbyID}`, {
+        headers: {
+            papalobby: getCurrentLobbyId()
+        }
+    });
+
+    if (!response.ok) {
+        // throw new Error("not logged in");
+        return null;
+    } else {
+        return await response.json();
+    }
+}
+
+export function initLobby(): Promise<Lobby> {
+    let lobbyID = getCurrentLobbyId();
+
+    return fetch(`${BACKEND_URL}/${lobbyID}/init`, {
+        headers: {
+            papaLobby: lobbyID
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("not logged in");
+            } else {
+                return response.json();
+            }
+        })
+        .catch(err => {
+            throw new Error("something went wrong intializing the lobby" + err.message);
+        });
+}
+
+export async function joinLobby(
+    code: string,
+): Promise<Result<Lobby>> {
+    const response = await fetch(`${BACKEND_URL}/lobby/${code}`, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ code })
+    });
+
+    if (response.ok) {
+        let lobby: Lobby = await response.json();
+        //setCurrentUser(user);
+        setCurrentLobby(lobby);
+        return { value: lobby, status: "success" };
+    } else {
+        return { error: response.status.toString(), status: "failure" };
+    }
+}
+
+// export type Resturaunt = {
+//     name: String;
+//     other info here
+//     restInfo: RestInfo[];
+// };
+
+// export type RestInfo = {
+//     id: string;
+//     name: string;
+//     location: string | null;
+//     price: string | null;
+//     cuisine: string;
+//     OTHER REST INFO
+//     rating: {
+//         value: string;
+//     } | null;
+// };
+
+
 //
 // export type Feed = {
 //     shelves: Shelf[];
@@ -115,6 +211,8 @@ export async function logout() {
 let exports = {
     getCurrentUser,
     //getFeed,
+    getCurrentLobby,
+    joinLobby,
     logout,
     login
 };
