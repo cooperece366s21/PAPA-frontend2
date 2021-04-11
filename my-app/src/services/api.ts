@@ -190,7 +190,7 @@ export async function JoinLobby(
     code: string,
 ): Promise<Result<Lobby>> {
     const response = await fetch(`${BACKEND_URL}/joinLobby`, {
-        method: "Post",
+        method: "POST",
         mode: "cors",
         headers: {
             "Content-Type": "application/json"
