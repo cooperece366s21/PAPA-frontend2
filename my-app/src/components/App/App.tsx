@@ -3,6 +3,7 @@ import "./App.css";
 import api, { User,Lobby } from "../../services/api";
 import { Login } from "../Login/Login";
 import { JoinLobby } from "../Lobby/joinLobby";
+import { LeaveLobby } from "../Lobby/leaveLobby";
 import { Logout } from "../Logout/Logout";
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
@@ -20,11 +21,12 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ user: currentUser });
 
     const currentLobby = await api.getCurrentLobby();
-    this.setState({ lobby: currentLobby});
+    this.setState({ user: currentUser, lobby: currentLobby});
   }
 
   render() {
     const { user } = this.state;
+    const { lobby } = this.state;
     return (
         <Box className="App">
           <Stack spacing={6}>
@@ -40,15 +42,25 @@ class App extends React.Component<AppProps, AppState> {
                 <Login onLoggedIn={user => this.setState({ user })} />
             ) : (
                 <Box>
-                  <span>Hello {user.name}</span>
+                  <span>Hello {user.username}</span>
                   <Logout onLoggedOut={() => this.setState({ user: null })} />
-                  <JoinLobby onEnterLobby={() => this.setState({ })} />
+                    <Box>
+                    {lobby == null ? (
+                        <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
+                        ) : (
+                            <Box>
+                                <span>Welcome to lobby with code: {lobby.code}</span>
+                                <LeaveLobby onLeftLobby={() => this.setState({ lobby: null })} />
 
+                            </Box>
+                    )}
                   {/*<UserFeed />*/}
 
+                    </Box>
                 </Box>
 
             )}
+
           </Box>
 
             {/*<Box>*/}

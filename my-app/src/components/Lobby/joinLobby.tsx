@@ -31,7 +31,7 @@ export class JoinLobby extends React.Component<LobbyProps, LobbyJoinState> {
         this.setState({ loading: true });
 
         const { onEnterLobby } = this.props;
-        const { lobby} = this.state;
+        const { lobby } = this.state;
 
         const result = await api.JoinLobby(lobby);
 

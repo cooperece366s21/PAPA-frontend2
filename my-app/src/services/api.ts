@@ -11,9 +11,7 @@ function setCurrentUser(user: User): void {
 
 export type User = {
     id: string;
-    name: string;
-    subscription: string | null;
-    genres: string[];
+    username: string;
 };
 
 async function getCurrentUser(): Promise<User | null> {
