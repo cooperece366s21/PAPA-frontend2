@@ -38,11 +38,18 @@ function setCurrentLobby(lobby: Lobby): void {
     localStorage.setItem("papalobby", lobby.id);
 }
 
+//not sure if we want the resturant list in local storage but this might be complicated to do
+// function setLobbyList(lobby: Lobby): void {
+//     localStorage.setItem("papalobbylist", lobby.restaurant_maps);
+// }
+
 export type Lobby = {
     id: string;
-    code: string;
+    code: string | null;
     restaurant_maps: Array<string>
 };
+
+
 
 async function getCurrentLobby(): Promise<Lobby | null> {
 
@@ -82,11 +89,17 @@ export function initLobby(): Promise<Lobby> {
         });
 }
 
-// export type Resturaunt = {
-//     name: String;
-//     other info here
-//     restInfo: RestInfo[];
-// };
+export type Restaurant = {
+    id: string;
+    name: String;
+    price: String | null;
+    rating: number;
+    //NOT SURE HOW TO DO THE REST
+    // Cuisine cuisine();
+    // Address address();
+    // PhoneNumber phoneNumber();
+    // OperatingHours operatingHours();
+};
 
 // export type RestInfo = {
 //     id: string;
@@ -111,16 +124,38 @@ export function initLobby(): Promise<Lobby> {
 //     shelfItems: Content[];
 // };
 
-export type Content = {
-    id: string;
-    title: string;
-    thumbnail: string | null;
-    distributorId: string | null;
-    genre: string;
-    rating: {
-        value: string;
-    } | null;
-};
+// export type Content = {
+//     id: string;
+//     title: string;
+//     thumbnail: string | null;
+//     distributorId: string | null;
+//     genre: string;
+//     rating: {
+//         value: string;
+//     } | null;
+// };
+
+
+
+export function GetRestaurantList(): Promise<string[]> {
+    let lobbyID = getCurrentLobbyId();
+
+    return fetch(`${BACKEND_URL}/${lobbyID}/getList`, {
+        headers: {
+            papalobby: lobbyID
+        }
+    })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error("not in a lobby");
+            } else {
+                return response.json();
+            }
+        })
+        .catch(err => {
+            throw new Error("something went wrong loading the restaurant list" + err.message);
+        });
+}
 
 // export function getFeed(): Promise<Feed> {
 //     let userId = getCurrentUserId();
@@ -219,7 +254,10 @@ export async function LeaveLobby() {
 let exports = {
     getCurrentUser,
     //getFeed,
+    GetRestaurantList,
     getCurrentLobby,
+    initLobby,
+    getCurrentLobbyId,
     JoinLobby,
     LeaveLobby,
     logout,

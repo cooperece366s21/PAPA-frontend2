@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
-import api, { User,Lobby } from "../../services/api";
+import api, { User,Lobby,GetRestaurantList } from "../../services/api";
 import { Login } from "../Login/Login";
 import { JoinLobby } from "../Lobby/joinLobby";
 import { LeaveLobby } from "../Lobby/leaveLobby";
+import { Start } from "../Lobby/Start";
 import { Logout } from "../Logout/Logout";
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
@@ -21,7 +22,10 @@ class App extends React.Component<AppProps, AppState> {
     this.setState({ user: currentUser });
 
     const currentLobby = await api.getCurrentLobby();
-    this.setState({ user: currentUser, lobby: currentLobby});
+    this.setState({user: currentUser, lobby: currentLobby});
+    // const currentLobbyID = await api.getCurrentLobbyId();
+    // const currentLobbyList = await api.GetRestaurantList();
+    // this.setState({ user: currentUser, lobby: {id: currentLobby, code: currentLobby, restaurant_maps:currentLobbyList}});
   }
 
   render() {
@@ -51,6 +55,8 @@ class App extends React.Component<AppProps, AppState> {
                             <Box>
                                 <span>Welcome to lobby with code: {lobby.code}</span>
                                 <LeaveLobby onLeftLobby={() => this.setState({ lobby: null })} />
+                                {/*<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />*/}
+                                {/*<GetRestaurantList() />*/}
 
                             </Box>
                     )}
