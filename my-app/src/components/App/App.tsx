@@ -8,6 +8,9 @@ import { Start } from "../Lobby/Start";
 import { Logout } from "../Logout/Logout";
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
+import {LobbyFeed} from "../Lobby/LobbyFeed";
+import {Like} from "../Preferences/Like";
+import {Dislike} from "../Preferences/Dislike";
 
 // props ~ inputs that don't change
 // state ~ internal and can change
@@ -46,22 +49,39 @@ class App extends React.Component<AppProps, AppState> {
                 <Login onLoggedIn={user => this.setState({ user })} />
             ) : (
                 <Box>
-                  <span>Hello {user.username}</span>
-                  <Logout onLoggedOut={() => this.setState({ user: null })} />
+                  <span>Hello USERNAME {user.username}</span>
+                  {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>
                     {lobby == null ? (
                         <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
                         ) : (
                             <Box>
                                 <span>Welcome to lobby with code: {lobby.code}</span>
-                                <LeaveLobby onLeftLobby={() => this.setState({ lobby: null })} />
-                                {/*<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />*/}
-                                {/*<GetRestaurantList() />*/}
+                                <Box>
+                                    <LeaveLobby onLeftLobby={() => this.setState({ lobby: null })} />
+                                </Box>
+
+                                {/*{<GetRestaurantList />}*/}
+                                <LobbyFeed />
+
+                                {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
+                                <Box>
+                                    <span>SOME RESTAURANT OPTION</span>
+                                </Box>
+                                <Box>
+                                    {<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}
+                                    <span>      </span>
+                                    {<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}
+                                </Box>
 
                             </Box>
                     )}
                   {/*<UserFeed />*/}
 
+                    </Box>
+
+                    <Box>
+                        <Logout onLoggedOut={() => this.setState({ user: null })} />
                     </Box>
                 </Box>
 

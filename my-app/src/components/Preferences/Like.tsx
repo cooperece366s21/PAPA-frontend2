@@ -3,11 +3,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
 import React from "react";
 import api from "../../services/api";
 
-export type StartProps = { onStarted: () => void };
-export type StartState = { loading: boolean };
+export type LikeProps = { onLike: () => void };
+export type LikeState = { loading: boolean };
 
-export class Start extends React.Component<StartProps, StartState>{
-    state: StartState = {
+export class Like extends React.Component<LikeProps, LikeState>{
+    state: LikeState = {
         loading: false
     };
 
@@ -17,9 +17,10 @@ export class Start extends React.Component<StartProps, StartState>{
                 isLoading={this.state.loading}
                 onClick={() => this.onClick()}
                 type="submit"
-                >
-                Start Lobby
-                {/*<ArrowRightIcon w={3} h={3} color="red.500" />*/}
+
+            >
+
+                {<ArrowRightIcon w={5} h={5} color="red.500" />}
 
             </Button>
         );
@@ -27,9 +28,9 @@ export class Start extends React.Component<StartProps, StartState>{
 
     async onClick() {
         this.setState({ loading: true });
-        await api.initLobby();
+        await api.Like();
         this.setState({ loading: false });
-        this.props.onStarted();
+        this.props.onLike();
     }
 
 }
