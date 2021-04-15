@@ -6,6 +6,7 @@ import { JoinLobby } from "../Lobby/joinLobby";
 import { LeaveLobby } from "../Lobby/leaveLobby";
 import { Start } from "../Lobby/Start";
 import { Logout } from "../Logout/Logout";
+
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import {LobbyFeed} from "../Lobby/LobbyFeed";
@@ -46,10 +47,10 @@ class App extends React.Component<AppProps, AppState> {
           </Stack>
           <Box>
             {user === null ? (
-                <Login onLoggedIn={user => this.setState({ user })} />
+                <Login onLoggedIn={user => this.setState({ user: user, lobby: null })} />
             ) : (
                 <Box>
-                  <span>Hello USERNAME {user.username}</span>
+                  <span>Hello {user.ID}</span>
                   {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>
                     {lobby == null ? (
@@ -58,7 +59,7 @@ class App extends React.Component<AppProps, AppState> {
                             <Box>
                                 <span>Welcome to lobby with code: {lobby.code}</span>
                                 <Box>
-                                    <LeaveLobby onLeftLobby={() => this.setState({ lobby: null })} />
+                                    <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />
                                 </Box>
 
                                 {/*{<GetRestaurantList />}*/}
@@ -81,7 +82,7 @@ class App extends React.Component<AppProps, AppState> {
                     </Box>
 
                     <Box>
-                        <Logout onLoggedOut={() => this.setState({ user: null })} />
+                        <Logout onLoggedOut={() => this.setState({ user: null, lobby: null })} />
                     </Box>
                 </Box>
 

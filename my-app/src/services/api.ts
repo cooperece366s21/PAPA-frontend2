@@ -6,12 +6,13 @@ function getCurrentUserId(): string {
 }
 
 function setCurrentUser(user: User): void {
-    localStorage.setItem("papauser", user.id);
+    localStorage.setItem("papauser", user.ID);
+    debugger;
 }
 
 export type User = {
-    id: string;
-    username: string;
+    ID: string;
+    nickname: string;
 };
 
 async function getCurrentUser(): Promise<User | null> {
@@ -221,7 +222,9 @@ export async function login(
 
     if (response.ok) {
         let user: User = await response.json();
-        setCurrentUser(user);
+
+        setCurrentUser(user );
+
         return { value: user, status: "success" };
     } else {
         return { error: response.status.toString(), status: "failure" };
