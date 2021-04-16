@@ -1,10 +1,11 @@
 import React from "react";
 import "./App.css";
-import api, { User,Lobby,GetRestaurantList } from "../../services/api";
+import api, { User,Lobby } from "../../services/api";
 import { Login } from "../Login/Login";
 import { JoinLobby } from "../Lobby/joinLobby";
 import { LeaveLobby } from "../Lobby/leaveLobby";
 import { Start } from "../Lobby/Start";
+import { End } from "../Lobby/End";
 import { Logout } from "../Logout/Logout";
 
 // import { UserFeed } from "../Feed/Feed";
@@ -63,7 +64,7 @@ class App extends React.Component<AppProps, AppState> {
                                 </Box>
 
                                 {/*{<GetRestaurantList />}*/}
-                                <LobbyFeed />
+                                {/*<LobbyFeed />*/}
 
                                 {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
                                 <Box>
@@ -74,6 +75,8 @@ class App extends React.Component<AppProps, AppState> {
                                     <span>      </span>
                                     {<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}
                                 </Box>
+
+                                {<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}
 
                             </Box>
                     )}

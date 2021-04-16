@@ -36,7 +36,7 @@ function getCurrentLobbyId(): string {
 }
 
 function setCurrentLobby(lobby: Lobby): void {
-    localStorage.setItem("papalobby", lobby.id);
+    localStorage.setItem("papalobby", lobby.ID);
 }
 
 //not sure if we want the resturant list in local storage but this might be complicated to do
@@ -83,8 +83,28 @@ export function initLobby(): Promise<Lobby> {
         });
 }
 
+export function getRecommendation(): Promise<Restaurant> {
+    // let lobbyID = getCurrentLobbyId();
+    let lobbyID = "code1"
+    return fetch(`${BACKEND_URL}/${lobbyID}/recommendation`, {
+        headers: {
+            papalobby: lobbyID
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("not logged in");
+            } else {
+                return response.json();
+            }
+        })
+        .catch(err => {
+            throw new Error("something went wrong getting the recommendation for the lobby" + err.message);
+        });
+}
+
 export type Lobby = {
-    id: string;
+    ID: string;
     code: string | null;
     restaurant_map: Array<string>;
     // restaurantList: Restaurant[];
@@ -92,11 +112,11 @@ export type Lobby = {
 
 export type Feed = {
     restaurants: Restaurant[];
-    // restaurants: string[];
+    //restaurants: string[];
 }
 
 export type Restaurant = {
-    name: string;
+    id: string;
     info: Info[];
 }
 
@@ -223,7 +243,7 @@ export async function login(
     if (response.ok) {
         let user: User = await response.json();
 
-        setCurrentUser(user );
+        setCurrentUser(user);
 
         return { value: user, status: "success" };
     } else {
@@ -279,7 +299,7 @@ function getCurrentRestaurantId(): string {
 }
 
 function setCurrentRestaurant(restaurant: Restaurant): void {
-    localStorage.setItem("papacurrentrest", restaurant.name);
+    localStorage.setItem("papacurrentrest", restaurant.id);
 }
 
 export async function Like() {
@@ -333,6 +353,7 @@ let exports = {
     logout,
     login,
     Like,
-    Dislike
+    Dislike,
+    getRecommendation
 };
 export default exports;
