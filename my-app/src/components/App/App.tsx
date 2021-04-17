@@ -3,6 +3,7 @@ import "./App.css";
 import api, { User,Lobby } from "../../services/api";
 import { Login } from "../Login/Login";
 import { JoinLobby } from "../Lobby/joinLobby";
+import { CreateLobby } from "../Lobby/CreateLobby";
 import { LeaveLobby } from "../Lobby/leaveLobby";
 import { Start } from "../Lobby/Start";
 import { End } from "../Lobby/End";
@@ -35,6 +36,7 @@ class App extends React.Component<AppProps, AppState> {
 
   render() {
     const { user } = this.state;
+    // const { lobbyHost } = this.state;
     const { lobby } = this.state;
     return (
         <Box className="App">
@@ -55,7 +57,8 @@ class App extends React.Component<AppProps, AppState> {
                   {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>
                     {lobby == null ? (
-                        <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
+                        <CreateLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
+                        // && <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
                         ) : (
                             <Box>
                                 <span>Welcome to lobby with code: {lobby.code}</span>
@@ -80,6 +83,35 @@ class App extends React.Component<AppProps, AppState> {
 
                             </Box>
                     )}
+
+                    {lobby == null ? (
+                        <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
+                    ) : (
+                        <Box>
+                            {/*<span>Welcome to lobby with code: {lobby.code}</span>*/}
+                            {/*<Box>*/}
+                            {/*    <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />*/}
+                            {/*</Box>*/}
+
+                            {/*/!*{<GetRestaurantList />}*!/*/}
+                            {/*/!*<LobbyFeed />*!/*/}
+
+                            {/*/!*{<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}*!/*/}
+                            {/*<Box>*/}
+                            {/*    <span>SOME RESTAURANT OPTION</span>*/}
+                            {/*</Box>*/}
+                            {/*<Box>*/}
+                            {/*    {<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                            {/*    <span>      </span>*/}
+                            {/*    {<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                            {/*</Box>*/}
+
+                            {/*/!*{<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}*!/*/}
+
+                        </Box>
+                    )}
+
+
                   {/*<UserFeed />*/}
 
                     </Box>

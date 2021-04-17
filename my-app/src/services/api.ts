@@ -7,7 +7,7 @@ function getCurrentUserId(): string {
 
 function setCurrentUser(user: User): void {
     localStorage.setItem("papauser", user.ID);
-    debugger;
+    // debugger;
 }
 
 export type User = {

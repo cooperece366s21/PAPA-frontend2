@@ -45,6 +45,23 @@ export class Login extends React.Component<LoginProps, LoginState> {
         this.setState({ loading: false });
     }
 
+    async onSubmitSignUp() {
+        this.setState({ loading: true });
+
+        //const { onLoggedIn } = this.props;
+        const { username, password } = this.state;
+
+        //const result = await api.signUp(username, password);
+
+        // if (result.status === "success") {
+        //     onLoggedIn(result.value);
+        // } else {
+        //     this.setState({ loginResponse: result.error });
+        // }
+        //
+        // this.setState({ loading: false });
+    }
+
     render() {
         const { loginResponse } = this.state;
 
@@ -74,11 +91,22 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     </FormControl>
                     <Button
                         type="submit"
-                        isLoading={this.state.loading}
+                        // isLoading={this.state.loading}
                         onClick={() => this.onSubmit()}
                     >
                         Sign in
                     </Button>
+
+                    <Box>
+                        <Button
+                            type="submit"
+                            //isLoading={this.state.loading}
+                            onClick={() => this.onSubmitSignUp()}
+                        >
+                            Sign up
+                        </Button>
+                    </Box>
+
                 </form>
             </Box>
         );
