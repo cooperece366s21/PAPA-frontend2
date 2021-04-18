@@ -71,7 +71,7 @@ class App extends React.Component<AppProps, AppState> {
                                 </Box>
 
                                 {/*{<GetRestaurantList />}*/}
-                                <LobbyFeed />
+                                <LobbyFeed currentIdx={this.state.restIdx}/>
 
                                 {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
                                 <Box>
@@ -81,9 +81,9 @@ class App extends React.Component<AppProps, AppState> {
                                     {/*{<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}*/}
                                     {/*<span>      </span>*/}
                                     {/*{<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
-                                    {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby })} />}
+                                    {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
                                     <span>      </span>
-                                    {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby })} />}
+                                    {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
                                 </Box>
 
                                 {<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}

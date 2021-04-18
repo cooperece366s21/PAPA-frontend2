@@ -5,22 +5,21 @@ import api, {Feed, GetRestaurantList, Restaurant} from "../../services/api";
 
 type FeedState = {
     feed: Restaurant[] | null;
-    currentIdx: number | null
+    // currentIdx: number | null
 };
 
-type FeedProps = { };
+type FeedProps = { currentIdx: number };
 
 export class LobbyFeed extends React.Component<FeedProps, FeedState> {
     state: FeedState = {
-        feed: null,
-        currentIdx: null
+        feed: null
     };
 
     async componentDidMount() {
         // const feed = await api.GetRestaurantList();
         const feed = await api.GetRestaurantList();
         //debugger;
-        this.setState({ feed: feed , currentIdx: 0});
+        this.setState({ feed: feed});
 
     }
 
@@ -30,7 +29,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
 
     render() {
 
-        const { feed, currentIdx } = this.state;
+        const { feed } = this.state;
         return (
             <VStack>
                 {/*{feed?.map((restaurant, idx) => (*/}
@@ -50,7 +49,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                 {/*))}*/}
                 <Box>
                     <Heading as="h2" size="2xl">
-                        {feed && feed[currentIdx??0].id}
+                        {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx] }
                     </Heading>
                 </Box>
             </VStack>
