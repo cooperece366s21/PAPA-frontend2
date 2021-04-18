@@ -112,12 +112,12 @@ export type Lobby = {
 
 export type Feed = {
     restaurants: Restaurant[];
-    //restaurants: string[];
+    // restaurants: string[];
 }
 
 export type Restaurant = {
     id: string;
-    info: Info[];
+    info: Info[] | null;
 }
 
 export type Info = {
@@ -156,7 +156,7 @@ export type Info = {
 
 
 
-export function GetRestaurantList(): Promise<Feed> {
+export function GetRestaurantList(): Promise<Restaurant[]> {
     // let lobbyID = getCurrentLobbyId();
     let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/getList`, {

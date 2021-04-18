@@ -8,6 +8,7 @@ import { LeaveLobby } from "../Lobby/leaveLobby";
 import { Start } from "../Lobby/Start";
 import { End } from "../Lobby/End";
 import { Logout } from "../Logout/Logout";
+import { Preference} from "../Preferences/Preference";
 
 // import { UserFeed } from "../Feed/Feed";
 import { Box, Heading, Stack } from "@chakra-ui/react";
@@ -18,10 +19,10 @@ import {Dislike} from "../Preferences/Dislike";
 // props ~ inputs that don't change
 // state ~ internal and can change
 type AppProps = {};
-type AppState = { user: User | null, lobby: Lobby |null};
+type AppState = { user: User | null, lobby: Lobby |null, restIdx: number};
 
 class App extends React.Component<AppProps, AppState> {
-  state: AppState = { user: null , lobby: null};
+  state: AppState = { user: null , lobby: null, restIdx: 0};
 
   async componentDidMount() {
     const currentUser = await api.getCurrentUser();
@@ -49,6 +50,9 @@ class App extends React.Component<AppProps, AppState> {
             </Heading>
           </Stack>
           <Box>
+              <span>If you are a new user, please enter the username and password that you would like and then click sign up. After this just simple click sign in.<br/> </span>
+              <span>If you are a returning user, please enter your username and password and click sign in.<br/></span>
+              <span>If you want to change your username or password, please enter the username and password that you would like and then click sign up. <br/></span>
             {user === null ? (
                 <Login onLoggedIn={user => this.setState({ user: user, lobby: null })} />
             ) : (
@@ -67,16 +71,19 @@ class App extends React.Component<AppProps, AppState> {
                                 </Box>
 
                                 {/*{<GetRestaurantList />}*/}
-                                {/*<LobbyFeed />*/}
+                                <LobbyFeed />
 
                                 {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
                                 <Box>
                                     <span>SOME RESTAURANT OPTION</span>
                                 </Box>
                                 <Box>
-                                    {<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}
+                                    {/*{<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                                    {/*<span>      </span>*/}
+                                    {/*{<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                                    {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby })} />}
                                     <span>      </span>
-                                    {<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}
+                                    {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby })} />}
                                 </Box>
 
                                 {<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}
