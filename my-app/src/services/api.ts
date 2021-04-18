@@ -64,8 +64,8 @@ async function getCurrentLobby(): Promise<Lobby | null> {
 }
 
 export function initLobby(): Promise<Lobby> {
-    // let lobbyID = getCurrentLobbyId();
-    let lobbyID = "code1"
+    let lobbyID = getCurrentLobbyId();
+    // let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/init`, {
         headers: {
             papalobby: lobbyID
@@ -84,8 +84,8 @@ export function initLobby(): Promise<Lobby> {
 }
 
 export function getRecommendation(): Promise<Restaurant> {
-    // let lobbyID = getCurrentLobbyId();
-    let lobbyID = "code1"
+    let lobbyID = getCurrentLobbyId();
+    // let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/recommendation`, {
         headers: {
             papalobby: lobbyID
@@ -111,8 +111,8 @@ export type Lobby = {
 };
 
 export type Feed = {
-    restaurants: Restaurant[];
-    // restaurants: string[];
+    // restaurants: Restaurant[];
+    restaurants: string[];
 }
 
 export type Restaurant = {
@@ -156,9 +156,9 @@ export type Info = {
 
 
 
-export function GetRestaurantList(): Promise<Restaurant[]> {
-    // let lobbyID = getCurrentLobbyId();
-    let lobbyID = "code1"
+export function GetRestaurantList(): Promise<string[]> {
+    let lobbyID = getCurrentLobbyId();
+    // let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/getList`, {
         headers: {
             papalobby: lobbyID
@@ -177,8 +177,8 @@ export function GetRestaurantList(): Promise<Restaurant[]> {
 }
 
 export function getLobbyFeed(): Promise<Feed> {
-    // let lobbyID = getCurrentLobbyId();
-    let lobbyID = "code1"
+    let lobbyID = getCurrentLobbyId();
+    // let lobbyID = "code1"
 
     return fetch(`${BACKEND_URL}/${lobbyID}/getLobbyFeed`, {
         headers: {
@@ -298,47 +298,51 @@ function getCurrentRestaurantId(): string {
     return localStorage.getItem("papacurrentrest") || "";
 }
 
-function setCurrentRestaurant(restaurant: Restaurant): void {
-    localStorage.setItem("papacurrentrest", restaurant.id);
+export function setCurrentRestaurant(restaurant: string | null): void {
+
+    if(restaurant == null){
+        restaurant = "currentlyNothing"
+    }
+    //console.log(restaurant)
+    localStorage.setItem("papacurrentrest", restaurant);
 }
 
 export async function Like() {
-    // let lobbyID = getCurrentLobbyId();
-    // let userID = getCurrentUserId();
-    // let restID = getCurrentRestaurantId();
-    let lobbyID = "code1";
-    let userID = "Pablo";
-    let restID = "panya-bakery-new-york";
+    let lobbyID = getCurrentLobbyId();
+    let userID = getCurrentUserId();
+    // debugger;
+    let restID = getCurrentRestaurantId();
+    // let lobbyID = "code1";
+    // let userID = "Pablo";
+    //let restID = "panya-bakery-new-york";
     await fetch(`${BACKEND_URL}/${userID}/${lobbyID}/${restID}/like`, {
         method: "POST",
         headers: {
-            papauser: getCurrentUserId(),
-            papalobby: getCurrentLobbyId(),
-            papacurrentrest: getCurrentRestaurantId()
+            papauser: userID,
+            papalobby: lobbyID,
+            papacurrentrest: restID
         }
     });
     return false;
 }
 
 export async function Dislike() {
-    // let lobbyID = getCurrentLobbyId();
-    // let userID = getCurrentUserId();
-    // let restID = getCurrentRestaurantId();
-    let lobbyID = "code1";
-    let userID = "Pablo";
-    let restID = "panya-bakery-new-york";
+    let lobbyID = getCurrentLobbyId();
+    let userID = getCurrentUserId();
+    let restID = getCurrentRestaurantId();
+    // let lobbyID = "code1";
+    // let userID = "Pablo";
+    //let restID = "panya-bakery-new-york";
     await fetch(`${BACKEND_URL}/${userID}/${lobbyID}/${restID}/dislike`, {
         method: "POST",
         headers: {
-            papauser: getCurrentUserId(),
-            papalobby: getCurrentLobbyId(),
-            papacurrentrest: getCurrentRestaurantId()
+            papauser: userID,
+            papalobby: lobbyID,
+            papacurrentrest: restID
         }
     });
     return false;
 }
-
-
 
 let exports = {
     getCurrentUser,
@@ -350,6 +354,7 @@ let exports = {
     getCurrentLobbyId,
     JoinLobby,
     LeaveLobby,
+    setCurrentRestaurant,
     logout,
     login,
     Like,

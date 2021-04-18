@@ -71,16 +71,14 @@ class App extends React.Component<AppProps, AppState> {
                                 </Box>
 
                                 {/*{<GetRestaurantList />}*/}
+                                {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
                                 <LobbyFeed currentIdx={this.state.restIdx}/>
 
-                                {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
-                                <Box>
-                                    <span>SOME RESTAURANT OPTION</span>
-                                </Box>
                                 <Box>
                                     {/*{<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}*/}
                                     {/*<span>      </span>*/}
                                     {/*{<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                                    {/*{api.setCurrentRestaurant(feed ? feed[this.state.restIdx].id:null)}*/}
                                     {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
                                     <span>      </span>
                                     {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
