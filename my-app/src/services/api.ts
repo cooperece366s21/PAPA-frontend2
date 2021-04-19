@@ -124,7 +124,7 @@ export type Info = {
     id: string;
     name: string;
     price: string | null;
-    rating: number;
+    rating: string;
     //NOT SURE HOW TO DO THE REST
     // Cuisine cuisine();
     // Address address();

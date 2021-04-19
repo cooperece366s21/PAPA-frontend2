@@ -11,7 +11,7 @@ import { Logout } from "../Logout/Logout";
 import { Preference} from "../Preferences/Preference";
 
 // import { UserFeed } from "../Feed/Feed";
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import {Box, Heading, Stack, VStack, HStack, Center} from "@chakra-ui/react";
 import {LobbyFeed} from "../Lobby/LobbyFeed";
 import {Like} from "../Preferences/Like";
 import {Dislike} from "../Preferences/Dislike";
@@ -43,21 +43,23 @@ class App extends React.Component<AppProps, AppState> {
         <Box className="App">
           <Stack spacing={6}>
             <Heading as="h1" size="4xl">
-              PAPA
+              Welcome to PAPA!
             </Heading>
             <Heading as="h2" size="2xl">
-              TEST
+              PAPA Will Help You Decide!
             </Heading>
           </Stack>
           <Box>
-              <span>If you are a new user, please enter the username and password that you would like and then click sign up. After this just simple click sign in.<br/> </span>
-              <span>If you are a returning user, please enter your username and password and click sign in.<br/></span>
-              <span>If you want to change your username or password, please enter the username and password that you would like and then click sign up. <br/></span>
+
+              {user == null && (<span>If you are a new user, please enter the username and password that you would like and then click sign up. After this just simple click sign in.<br/> </span>)}
+              {user == null && (<span>If you are a returning user, please enter your username and password and click sign in.<br/></span>)}
+              {user == null && (<span>If you want to change your username or password, please enter the username and password that you would like and then click sign up. <br/></span>)}
             {user === null ? (
                 <Login onLoggedIn={user => this.setState({ user: user, lobby: null })} />
             ) : (
                 <Box>
                   <span>Hello {user.ID}</span>
+
                   {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>
                     {lobby == null ? (
@@ -65,13 +67,16 @@ class App extends React.Component<AppProps, AppState> {
                         // && <JoinLobby onEnterLobby={lobby => this.setState({ user: user , lobby: lobby })} />
                         ) : (
                             <Box>
-                                <span>Welcome to lobby with code: {lobby.code}</span>
-                                <Box>
-                                    <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />
-                                </Box>
+                                <span>Welcome to lobby with code: {lobby.code}<br/></span>
+                                <span>Please click on start when everyone is ready!</span>
+                                {/*<Box>*/}
+                                {/*    <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />*/}
+                                {/*</Box>*/}
 
                                 {/*{<GetRestaurantList />}*/}
-                                {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
+                                <Center>
+                                    {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
+                                </Center>
                                 <LobbyFeed currentIdx={this.state.restIdx}/>
 
                                 <Box>
@@ -79,14 +84,18 @@ class App extends React.Component<AppProps, AppState> {
                                     {/*<span>      </span>*/}
                                     {/*{<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
                                     {/*{api.setCurrentRestaurant(feed ? feed[this.state.restIdx].id:null)}*/}
-                                    {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
-                                    <span>      </span>
-                                    {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
+                                    <Center>
+                                        {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
+                                        {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
+                                    </Center>
                                 </Box>
 
                                 {<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}
-
+                                <Box>
+                                    <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />
+                                </Box>
                             </Box>
+
                     )}
 
                     {lobby == null ? (

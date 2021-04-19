@@ -1,5 +1,5 @@
 
-import { Box, Heading, HStack, VStack } from "@chakra-ui/react";
+import { Box, Heading, HStack, VStack, Center } from "@chakra-ui/react";
 import React from "react";
 import api, {Feed, GetRestaurantList, Restaurant, setCurrentRestaurant} from "../../services/api";
 
@@ -24,7 +24,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
     async componentDidMount() {
         // const feed = await api.GetRestaurantList();
         const feed = await api.GetRestaurantList();
-        console.log(feed)
+        //console.log(feed)
         //debugger;
         this.setState({ feed: feed});
 
@@ -77,12 +77,17 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                 {/*else {*/}
                 {/*    <Heading as="h2" size="2xl">No More Options</Heading>*/}
                 {/*}*/}
-                <Heading as="h2" size="2xl">Please like or dislike</Heading>
+                {/*<Heading as="h2" size="2xl">Please like or dislike</Heading>*/}
                 <Box>
-                    <Heading as="h2" size="2xl">
+                    <Center>
+                        {feed && feed.length > this.props.currentIdx &&  (<Heading as="h2" size="2xl">Please like or dislike<br/></Heading>)}
+                    </Center>
+                        <Heading as="h2" size="2xl">
 
-                        {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx] }
-                    </Heading>
+                            {feed && feed.length > this.props.currentIdx && (feed[this.props.currentIdx])}
+
+                        </Heading>
+                        {feed && feed.length-1 < this.props.currentIdx &&  (<Heading as="h2" size="2xl">No More Options!</Heading>)}
                 </Box>
             </VStack>
         );
