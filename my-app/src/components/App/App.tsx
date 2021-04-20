@@ -58,7 +58,7 @@ class App extends React.Component<AppProps, AppState> {
                 <Login onLoggedIn={user => this.setState({ user: user, lobby: null })} />
             ) : (
                 <Box>
-                  <span>Hello {user.nickname}</span>
+                  <span>Hello {user.name}</span>
 
                   {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>
@@ -74,9 +74,9 @@ class App extends React.Component<AppProps, AppState> {
                                 {/*</Box>*/}
 
                                 {/*{<GetRestaurantList />}*/}
-                                <Center>
-                                    {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}
-                                </Center>
+                                {/*<Center>*/}
+                                {/*    {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}*/}
+                                {/*</Center>*/}
                                 <LobbyFeed currentIdx={this.state.restIdx}/>
 
                                 <Box>

@@ -12,7 +12,8 @@ function setCurrentUser(user: User): void {
 
 export type User = {
     ID: string;
-    nickname: string;
+    name: string;
+
 };
 
 async function getCurrentUser(): Promise<User | null> {
