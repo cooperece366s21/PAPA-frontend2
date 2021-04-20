@@ -50,7 +50,9 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
         //const { onLoggedIn } = this.props;
         const { username, password } = this.state;
-
+        // <Heading as="h2" size="1xl">
+        //     Great you have signed up {username}! Please sign in above!
+        // </Heading>
         //const result = await api.signUp(username, password);
 
         // if (result.status === "success") {
@@ -60,10 +62,13 @@ export class Login extends React.Component<LoginProps, LoginState> {
         // }
         //
         // this.setState({ loading: false });
+
+        //this.setState({ loading: false });
     }
 
     render() {
         const { loginResponse } = this.state;
+        const { username } = this.state;
 
         return (
             <Box>
@@ -105,6 +110,10 @@ export class Login extends React.Component<LoginProps, LoginState> {
                         >
                             Sign up
                         </Button>
+
+                        <Box>
+                        </Box>
+
                     </Box>
 
                 </form>
