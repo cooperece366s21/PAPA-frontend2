@@ -106,7 +106,7 @@ export function getRecommendation(): Promise<Restaurant> {
 export type Lobby = {
     ID: string;
     code: string | null;
-    restaurant_map: Array<string>;
+    ownerID: string | null;
     // restaurantList: Restaurant[];
 };
 
@@ -301,7 +301,7 @@ export async function CreateLobby(
     if (response.ok) {
         let lobby: Lobby = await response.json();
         //setCurrentUser(user);
-        //setCurrentLobby(lobby);
+        setCurrentLobby(lobby);
         return {value: lobby, status: "success"};
     } else {
         return {error: response.status.toString(), status: "failure"};
