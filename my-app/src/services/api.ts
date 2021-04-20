@@ -288,8 +288,8 @@ export async function logout() {
 export async function CreateLobby(
     location: string,
 ): Promise<Result<Lobby>> {
-    let userID = getCurrentUserId();
-    const response = await fetch(`${BACKEND_URL}/${userID}/${location}/createLobby`, {
+    //let userID = getCurrentUserId();
+    const response = await fetch(`${BACKEND_URL}/${location}/createLobby`, {
         method: "POST",
         mode: "cors",
         headers: {
