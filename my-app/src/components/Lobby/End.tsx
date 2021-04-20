@@ -32,7 +32,7 @@ export class End extends React.Component<EndProps, EndState>{
 
                 <Box>
                     <Heading as="h2" size="2xl">
-                        {recommendation?.id}
+                        {recommendation?.name}
                     </Heading>
                 </Box>
             </VStack>

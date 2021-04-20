@@ -112,17 +112,25 @@ export type Lobby = {
 
 export type Feed = {
     // restaurants: Restaurant[];
-    restaurants: string[];
+    restaurants: Restaurant[];
 }
 
 export type Restaurant = {
-    id: string;
-    info: Info;
+    ID: string | null;
+    alias: string | null;
+    name: string | null;
+    isOpenNow: boolean | null;
+    displayPhone: string | null;
+    price: string | null;
+    rating: string | null;
 }
 
 export type Info = {
-    id: string;
+    ID: string;
+    alias: string;
     name: string;
+    isOpenNow: boolean;
+    displayPhone: string;
     price: string | null;
     rating: string;
     //NOT SURE HOW TO DO THE REST
