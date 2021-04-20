@@ -227,6 +227,30 @@ export type Result<T> =
     status: "failure";
 };
 
+export async function SignUp(
+    username: string,
+    password: string
+): Promise<Result<User>> {
+    const response = await fetch(`${BACKEND_URL}/${username}/${password}/signUp`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+        let user: User = await response.json();
+
+        //setCurrentUser(user);
+
+        return { value: user, status: "success" };
+    } else {
+        return { error: response.status.toString(), status: "failure" };
+    }
+}
+
 export async function login(
     username: string,
     password: string
@@ -259,6 +283,29 @@ export async function logout() {
         }
     });
     return false;
+}
+
+export async function CreateLobby(
+    location: string,
+): Promise<Result<Lobby>> {
+    let userID = getCurrentUserId();
+    const response = await fetch(`${BACKEND_URL}/${userID}/${location}/createLobby`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({code})
+    });
+
+    if (response.ok) {
+        let lobby: Lobby = await response.json();
+        //setCurrentUser(user);
+        //setCurrentLobby(lobby);
+        return {value: lobby, status: "success"};
+    } else {
+        return {error: response.status.toString(), status: "failure"};
+    }
 }
 
 export async function JoinLobby(
@@ -352,9 +399,11 @@ let exports = {
     getCurrentLobby,
     initLobby,
     getCurrentLobbyId,
+    CreateLobby,
     JoinLobby,
     LeaveLobby,
     setCurrentRestaurant,
+    SignUp,
     logout,
     login,
     Like,
