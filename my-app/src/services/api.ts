@@ -117,7 +117,7 @@ export type Feed = {
 
 export type Restaurant = {
     id: string;
-    info: Info[] | null;
+    info: Info;
 }
 
 export type Info = {
@@ -155,8 +155,8 @@ export type Info = {
 // };
 
 
-
-export function GetRestaurantList(): Promise<string[]> {
+//might need to change this back to string
+export function GetRestaurantList(): Promise<Restaurant[]> {
     let lobbyID = getCurrentLobbyId();
     // let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/getList`, {
@@ -295,7 +295,7 @@ export async function CreateLobby(
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({code})
+        body: JSON.stringify({location})
     });
 
     if (response.ok) {

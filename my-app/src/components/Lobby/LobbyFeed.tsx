@@ -4,7 +4,7 @@ import React from "react";
 import api, {Feed, GetRestaurantList, Restaurant, setCurrentRestaurant} from "../../services/api";
 
 type FeedState = {
-    feed: string[] | null;
+    feed: Restaurant[] | null;
     // currentIdx: number | null
 };
 
@@ -18,7 +18,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
 
     componentDidUpdate() {
         //console.log(this.state.feed ? this.state.feed[this.props.currentIdx]:null)
-        api.setCurrentRestaurant(this.state.feed ? this.state.feed[this.props.currentIdx]:null);
+        api.setCurrentRestaurant(this.state.feed ? this.state.feed[this.props.currentIdx].info.name:null);
     }
 
     async componentDidMount() {
@@ -28,7 +28,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
         //debugger;
         this.setState({ feed: feed});
 
-        api.setCurrentRestaurant(feed ? feed[this.props.currentIdx]:null);
+        api.setCurrentRestaurant(feed ? feed[this.props.currentIdx].info.name:null);
 
 
     }
@@ -57,7 +57,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
 
                 {feed?.map((restaurant, idx) => (
                         <Box key={idx}>
-                            <span>{restaurant}</span>
+                            <span>{restaurant.info.name}</span>
                             {/*<Heading as="h2" size="2xl">*/}
                             {/*    {restaurant}*/}
                             {/*</Heading>*/}
@@ -84,7 +84,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                     </Center>
                         <Heading as="h2" size="2xl">
 
-                            {feed && feed.length > this.props.currentIdx && (feed[this.props.currentIdx])}
+                            {feed && feed.length > this.props.currentIdx && (feed[this.props.currentIdx].info.name)}
 
                         </Heading>
                         {feed && feed.length-1 < this.props.currentIdx &&  (<Heading as="h2" size="2xl">No More Options!</Heading>)}
