@@ -36,8 +36,8 @@ export class CreateLobby extends React.Component<LobbyProps, LobbyJoinState> {
         // const { lobby } = this.state;
         const { location } = this.state;
 
-        const result = await api.JoinLobby(location);
-        //const result = await api.CreateLobby(location);
+        //const result = await api.JoinLobby(location);
+        const result = await api.CreateLobby(location);
 
         if (result.status === "success") {
             onEnterLobby(result.value);
