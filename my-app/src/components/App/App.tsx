@@ -58,7 +58,7 @@ class App extends React.Component<AppProps, AppState> {
                 <Login onLoggedIn={user => this.setState({ user: user, lobby: null })} />
             ) : (
                 <Box>
-                  <span>Hello {user.ID}</span>
+                  <span>Hello {user.nickname}</span>
 
                   {/*<Logout onLoggedOut={() => this.setState({ user: null })} />*/}
                     <Box>

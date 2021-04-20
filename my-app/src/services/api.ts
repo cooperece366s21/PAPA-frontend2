@@ -293,7 +293,8 @@ export async function CreateLobby(
         method: "POST",
         mode: "cors",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            papauser: getCurrentUserId()
         },
         body: JSON.stringify({location})
     });
@@ -315,7 +316,8 @@ export async function JoinLobby(
         method: "POST",
         mode: "cors",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            papauser: getCurrentUserId()
         },
         body: JSON.stringify({code})
     });
