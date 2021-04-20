@@ -53,17 +53,17 @@ export class Login extends React.Component<LoginProps, LoginState> {
         // <Heading as="h2" size="1xl">
         //     Great you have signed up {username}! Please sign in above!
         // </Heading>
-        //const result = await api.signUp(username, password);
+        const result = await api.SignUp(username, password);
 
         // if (result.status === "success") {
         //     onLoggedIn(result.value);
         // } else {
         //     this.setState({ loginResponse: result.error });
         // }
+
+        // this.setState({ loading: false });
         //
         // this.setState({ loading: false });
-
-        //this.setState({ loading: false });
     }
 
     render() {
