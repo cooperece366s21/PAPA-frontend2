@@ -18,6 +18,8 @@ type LoginState = {
     password: string;
     loginResponse: string | null;
     loading: boolean;
+    signUpUser: boolean;
+    //signUpUser: User;
 };
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -25,7 +27,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
         username: "",
         password: "",
         loginResponse: null,
-        loading: false
+        loading: false,
+        signUpUser: false
     };
 
     async onSubmit() {
@@ -50,10 +53,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
         //const { onLoggedIn } = this.props;
         const { username, password } = this.state;
-        // <Heading as="h2" size="1xl">
-        //     Great you have signed up {username}! Please sign in above!
-        // </Heading>
-        const result = await api.SignUp(username, password);
+
+        const user = await api.SignUp(username, password);
 
         // if (result.status === "success") {
         //     onLoggedIn(result.value);
@@ -61,14 +62,18 @@ export class Login extends React.Component<LoginProps, LoginState> {
         //     this.setState({ loginResponse: result.error });
         // }
 
-        // this.setState({ loading: false });
+        // <Heading as="h2" size="1xl">
+        //     Great you have signed up {username}! Please sign in above!
+        // </Heading>
+        this.setState({ loading: false, signUpUser: true });
         //
-        // this.setState({ loading: false });
+        //this.setState({ loading: false, signUpUser: user });
+
     }
 
     render() {
         const { loginResponse } = this.state;
-        const { username } = this.state;
+        //const { signUpUser } = this.state;
 
         return (
             <Box>
@@ -112,6 +117,9 @@ export class Login extends React.Component<LoginProps, LoginState> {
                         </Button>
 
                         <Box>
+                            <Heading as="h2" size="1xl">
+                                {this.state.signUpUser && (<Heading as="h2" size="1xl">Great you have signed up, {this.state.username}! Please sign in above!</Heading>)}
+                            </Heading>
                         </Box>
 
                     </Box>

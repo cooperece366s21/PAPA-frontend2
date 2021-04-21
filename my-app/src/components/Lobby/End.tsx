@@ -34,6 +34,16 @@ export class End extends React.Component<EndProps, EndState>{
                     <Heading as="h2" size="2xl">
                         {recommendation?.name}
                     </Heading>
+
+                </Box>
+
+                <Box>
+                    <Heading as="h2" size="2xl">
+                        {/*{recommendation?.address.address1}*/}
+                        {/*{recommendation?.address.address2}*/}
+                        {/*{recommendation?.address.address3}*/}
+                        {/*{recommendation?.address.address1}*/}
+                    </Heading>
                 </Box>
             </VStack>
         );

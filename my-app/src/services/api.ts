@@ -124,6 +124,9 @@ export type Restaurant = {
     displayPhone: string | null;
     price: string | null;
     rating: string | null;
+    address: Address;
+    cuisines: Cuisine[];
+    phoneNumber: string;
 }
 
 export type Info = {
@@ -134,12 +137,33 @@ export type Info = {
     displayPhone: string;
     price: string | null;
     rating: string;
+    address: Address;
+    cuisines: Cuisine[];
+    phoneNumber: string;
     //NOT SURE HOW TO DO THE REST
     // Cuisine cuisine();
     // Address address();
     // PhoneNumber phoneNumber();
     // OperatingHours operatingHours();
-};
+}
+
+export type Cuisine = {
+    alias: string;
+    title: string;
+}
+
+export type Address = {
+    address1: string;
+    address2: string;
+    address3: string;
+    city: string;
+    zip_code: string;
+    country: string;
+    state: string;
+    display_address: string[];
+    cross_streets: string;
+
+}
 
 
 //
@@ -297,7 +321,9 @@ export async function logout() {
 export async function CreateLobby(
     location: string,
 ): Promise<Result<Lobby>> {
+
     let userID = getCurrentUserId();
+
     const response = await fetch(`${BACKEND_URL}/${userID}/${location}/createLobby`, {
         method: "POST",
         mode: "cors",
@@ -321,12 +347,14 @@ export async function CreateLobby(
 export async function JoinLobby(
     code: string,
 ): Promise<Result<Lobby>> {
+    //setCurrentUser(user);
+    let userID = getCurrentUserId();
     const response = await fetch(`${BACKEND_URL}/joinLobby`, {
         method: "POST",
         mode: "cors",
         headers: {
             "Content-Type": "application/json",
-            papauser: getCurrentUserId()
+            papauser: userID
         },
         body: JSON.stringify({code})
     });
@@ -342,10 +370,13 @@ export async function JoinLobby(
 }
 
 export async function LeaveLobby() {
+    let userID = getCurrentUserId();
+    let lobbyID =  getCurrentLobbyId();
     await fetch(`${BACKEND_URL}/leaveLobby`, {
         method: "POST",
         headers: {
-            papalobby: getCurrentLobbyId()
+            papalobby: lobbyID,
+            papauser: userID
         }
     });
     return false;
