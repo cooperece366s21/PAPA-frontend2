@@ -129,24 +129,24 @@ export type Restaurant = {
     phoneNumber: string;
 }
 
-export type Info = {
-    ID: string;
-    alias: string;
-    name: string;
-    isOpenNow: boolean;
-    displayPhone: string;
-    price: string;
-    rating: string;
-    address: Address;
-    cuisines: Cuisine[];
-    phoneNumber: string;
-
-    //NOT SURE HOW TO DO THE REST
-    // Cuisine cuisine();
-    // Address address();
-    // PhoneNumber phoneNumber();
-    // OperatingHours operatingHours();
-}
+// export type Info = {
+//     ID: string;
+//     alias: string;
+//     name: string;
+//     isOpenNow: boolean;
+//     displayPhone: string;
+//     price: string;
+//     rating: string;
+//     address: Address;
+//     cuisines: Cuisine[];
+//     phoneNumber: string;
+//
+//     //NOT SURE HOW TO DO THE REST
+//     // Cuisine cuisine();
+//     // Address address();
+//     // PhoneNumber phoneNumber();
+//     // OperatingHours operatingHours();
+// }
 
 export type Cuisine = {
     alias: string;

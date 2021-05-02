@@ -24,7 +24,6 @@ import {
 type FeedState = {
     feed: Restaurant[] | null;
     users: String[] | null;
-    info: String | null;
     // currentIdx: number | null
 };
 
@@ -34,15 +33,14 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
 
     state: FeedState = {
         feed: null,
-        users: null,
-        info: null,
+        users: null
     };
 
     componentDidUpdate() {
         //console.log(this.state.feed ? this.state.feed[this.props.currentIdx]:null)
         api.setCurrentRestaurant((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
-        api.GetUserList();
-        api.GetRestaurantInfo((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
+        //api.GetUserList();
+        //api.GetRestaurantInfo((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
         //this.setState({users: users, info: info });
     }
 
@@ -50,10 +48,10 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
         // const feed = await api.GetRestaurantList();
         const feed = await api.GetRestaurantList();
         const users = await api.GetUserList();
-        const info = await api.GetRestaurantInfo((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
+
         //console.log(feed)
-        //debugger;
-        this.setState({ feed: feed, users: users, info: info });
+        // debugger;
+        this.setState({ feed: feed, users: users});
 
         api.setCurrentRestaurant((feed && feed.length > this.props.currentIdx) ? feed[this.props.currentIdx].ID:null);
 
@@ -67,7 +65,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
 
         const { feed } = this.state;
         const { users } = this.state;
-        const { info } = this.state;
+        //const info = api.GetRestaurantInfo((feed && feed.length > this.props.currentIdx) ? feed[this.props.currentIdx].ID:null);
         // const split1 = info?.split("image_url");
         // const url = split1[1].split(":\");
         // if (feed == null){
@@ -119,7 +117,8 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                 {/*    <Heading as="h2" size="2xl">No More Options</Heading>*/}
                 {/*}*/}
                 {/*<Heading as="h2" size="2xl">Please like or dislike</Heading>*/}
-                <span>test: {info}</span>
+
+
                 <Text
                     // bgGradient="linear(to-l, #7928CA,#FF0080)"
                     color="black.300"
