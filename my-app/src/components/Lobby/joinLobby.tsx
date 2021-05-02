@@ -1,4 +1,5 @@
 import {
+    Flex,
     Box,
     Button,
     FormControl,
@@ -48,31 +49,78 @@ export class JoinLobby extends React.Component<LobbyProps, LobbyJoinState> {
         const { lobbyResponse } = this.state;
 
         return (
-            <Box>
-                <form onSubmit={e => e.preventDefault()}>
-                    {lobbyResponse && (
-                        <Heading as="h2" size="2xl">
-                            {this.state.lobbyResponse}
+            <Flex width="full" align="center" justifyContent="center">
+                <Box p={2}>
+                    <Box textAlign="center">
+                        <Heading
+                            fontWeight={400}
+                            fontSize={{ base: '2xl', sm: '4xl', md: '8xl' }}
+                            size="4x1"
+                            lineHeight={'110%'}
+                            color='red.800'
+                        >
+                            Join Lobby
                         </Heading>
-                    )}
-                    <FormControl id="lobby" isRequired>
-                        <FormLabel>Lobby</FormLabel>
-                        <Input
-                            type=""
-                            value={this.state.lobby}
-                            onChange={e => this.setState({ lobby: e.currentTarget.value })}
-                        />
-                    </FormControl>
+                    </Box>
+                    <Box my={4} textAlign="left">
+                        <form onSubmit={e => e.preventDefault()}>
+                            {lobbyResponse && (
+                                <Heading as="h2" size="2xl">
+                                    {this.state.lobbyResponse}
+                                </Heading>
+                            )}
+                            <FormControl>
+                                <FormLabel>Lobby Code</FormLabel>
+                                <Input
+                                    type="code"
+                                    placeholder="abcedf"
+                                    focusBorderColor="black.300"
+                                    // errorBorderColor="red.300"
+                                    value={this.state.lobby}
+                                    bg=''
+                                    onChange={e => this.setState({ lobby: e.currentTarget.value })}
+                                />
+                            </FormControl>
 
-                    <Button
-                        type="submit"
-                        isLoading={this.state.loading}
-                        onClick={() => this.onSubmit()}
-                    >
-                        Enter
-                    </Button>
-                </form>
-            </Box>
+                            <Button
+                                width="full"
+                                mt={4}
+                                type="submit"
+                                bg='red.200'
+                                isLoading={this.state.loading}
+                                onClick={() => this.onSubmit()}
+                            >
+                                Join
+                            </Button>
+                        </form>
+                    </Box>
+                </Box>
+            </Flex>
+            // <Box>
+            //     <form onSubmit={e => e.preventDefault()}>
+            //         {lobbyResponse && (
+            //             <Heading as="h2" size="2xl">
+            //                 {this.state.lobbyResponse}
+            //             </Heading>
+            //         )}
+            //         <FormControl id="lobby" isRequired>
+            //             <FormLabel>Lobby</FormLabel>
+            //             <Input
+            //                 type=""
+            //                 value={this.state.lobby}
+            //                 onChange={e => this.setState({ lobby: e.currentTarget.value })}
+            //             />
+            //         </FormControl>
+            //
+            //         <Button
+            //             type="submit"
+            //             isLoading={this.state.loading}
+            //             onClick={() => this.onSubmit()}
+            //         >
+            //             Enter
+            //         </Button>
+            //     </form>
+            // </Box>
         );
     }
 }

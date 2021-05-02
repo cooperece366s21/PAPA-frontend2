@@ -135,11 +135,12 @@ export type Info = {
     name: string;
     isOpenNow: boolean;
     displayPhone: string;
-    price: string | null;
+    price: string;
     rating: string;
     address: Address;
     cuisines: Cuisine[];
     phoneNumber: string;
+
     //NOT SURE HOW TO DO THE REST
     // Cuisine cuisine();
     // Address address();
@@ -188,13 +189,37 @@ export type Address = {
 // };
 
 
+export function GetUserList(): Promise<String[]> {
+    let lobbyID = getCurrentLobbyId();
+    //let restID = getCurrentRestaurantId();
+    // let lobbyID = "code1"
+    return fetch(`${BACKEND_URL}/${lobbyID}/getLobbyUsers`, {
+        headers: {
+            papalobby: lobbyID
+        }
+    })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error("not in a lobby");
+            } else {
+                return response.json();
+            }
+        })
+        .catch(err => {
+            throw new Error("something went wrong loading the user list" + err.message);
+        });
+}
+
+
 //might need to change this back to string
 export function GetRestaurantList(): Promise<Restaurant[]> {
     let lobbyID = getCurrentLobbyId();
+    let restID = getCurrentRestaurantId();
     // let lobbyID = "code1"
     return fetch(`${BACKEND_URL}/${lobbyID}/getList`, {
         headers: {
-            papalobby: lobbyID
+            papalobby: lobbyID,
+            papacurrentrest: restID
         }
     })
         .then(response => {
@@ -208,6 +233,31 @@ export function GetRestaurantList(): Promise<Restaurant[]> {
             throw new Error("something went wrong loading the restaurant list" + err.message);
         });
 }
+
+export function GetRestaurantInfo(restID: string|null): Promise<string> {
+    let lobbyID = getCurrentLobbyId();
+    //let restID = getCurrentRestaurantId();
+    // let lobbyID = "code1"
+    return fetch(`${BACKEND_URL}/${restID}/info`, {
+        headers: {
+            papalobby: lobbyID
+            //papacurrentrest: restID
+        }
+
+    })
+        .then(response => {
+            if(!response.ok) {
+                throw new Error("not in a lobby");
+            } else {
+                return response.json();
+            }
+        })
+        .catch(err => {
+            throw new Error("something went wrong loading the restaurant info" + err.message);
+        });
+}
+
+
 
 export function getLobbyFeed(): Promise<Feed> {
     let lobbyID = getCurrentLobbyId();
@@ -320,18 +370,19 @@ export async function logout() {
 
 export async function CreateLobby(
     location: string,
+    keyword: string,
 ): Promise<Result<Lobby>> {
 
     let userID = getCurrentUserId();
 
-    const response = await fetch(`${BACKEND_URL}/${userID}/${location}/createLobby`, {
+    const response = await fetch(`${BACKEND_URL}/${userID}/${location}/${keyword}/createLobby`, {
         method: "POST",
         mode: "cors",
         headers: {
             "Content-Type": "application/json",
             papauser: getCurrentUserId()
         },
-        body: JSON.stringify({location})
+        body: JSON.stringify({location, keyword})
     });
 
     if (response.ok) {
@@ -435,6 +486,8 @@ export async function Dislike() {
 
 let exports = {
     getCurrentUser,
+    GetUserList,
+    GetRestaurantInfo,
     //getFeed,
     getLobbyFeed,
     GetRestaurantList,
