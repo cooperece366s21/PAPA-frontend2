@@ -153,7 +153,7 @@ class App extends React.Component<AppProps, AppState> {
                                     </Center>
                                 </Box>
 
-                                {<End onEnded={() => this.setState({ user: user , lobby: lobby })} />}
+                                <End onEnded={() => this.setState({ user: user , lobby: lobby })} />
                                 <Box>
                                     <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />
                                 </Box>
