@@ -24,6 +24,25 @@ export class End extends React.Component<EndProps, EndState>{
                     isLoading={this.state.loading}
                     onClick={() => this.onClick()}
                     type="submit"
+                    as="button"
+                    p={4}
+                    // color="white"
+                    fontWeight="bold"
+                    borderRadius="md"
+                    bgGradient="linear(to-r, teal.500,green.500)"
+                    _hover={{
+                        bgClip: "text",
+                        bgGradient: "linear(to-l, #7928CA,#FF0080)"
+
+                        // background:
+                        //
+                        //     linear-gradient(to bottom, #fff, #bbb) content-box,
+                        //
+                        // linear-gradient(to right, #e94332, #a91302) padding-box,
+                        //
+                        // linear-gradient(to right, #0867a6, #4aa9e8) border-box;"
+                    }}
+
                 >
                     Get Recommendation
                     {/*<ArrowRightIcon w={3} h={3} color="red.500" />*/}

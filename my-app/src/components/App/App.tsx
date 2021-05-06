@@ -141,7 +141,7 @@ class App extends React.Component<AppProps, AppState> {
                                 fontWeight={400}
                                 fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                                 lineHeight={'110%'}>
-                                Hello {user.name}, join or create a lobby!
+                                Hello <Box color='#f00' fontWeight="extrabold">{user.name}</Box>, join or create a lobby!
                                 {/*<Text as={'span'} color={'green.400'}>*/}
                                 {/*    /!*fontWeight={400}*!/*/}
                                 {/*    Hello {user.name}, join or create a lobby!*/}
@@ -177,21 +177,57 @@ class App extends React.Component<AppProps, AppState> {
                                 {/*<Center>*/}
                                 {/*    {<Start onStarted={() => this.setState({ user: user , lobby: lobby })} />}*/}
                                 {/*</Center>*/}
-                                <LobbyFeed currentIdx={this.state.restIdx}/>
+
+
+
+<Center>
+
+
+<HStack>
+<Box>
+    {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
+</Box>
+<Box>
+    <LobbyFeed currentIdx={this.state.restIdx}/>
+</Box>
+
+                              <Box>
+                                  {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
+                              </Box>
+
+
+        {/*                        <LobbyFeed currentIdx={this.state.restIdx}/>
 
                                 <Box>
-                                    {/*{<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}*/}
-                                    {/*<span>      </span>*/}
-                                    {/*{<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}*/}
-                                    {/*{api.setCurrentRestaurant(feed ? feed[this.state.restIdx].id:null)}*/}
+                                    {<Dislike onDislike={() => this.setState({ user: user , lobby: lobby })} />}
+                                    <span>      </span>
+                                    {<Like onLike={() => this.setState({ user: user , lobby: lobby })} />}
+                                    {api.setCurrentRestaurant(feed ? feed[this.state.restIdx].id:null)}
                                     <Center>
                                         {<Preference isDislike={true} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
                                         {<Preference isDislike={false} onClick={() => this.setState({ user: user , lobby: lobby, restIdx: this.state.restIdx+1 })} />}
                                     </Center>
-                                </Box>
+                                </Box>*/}
+                            </HStack>
+</Center>
+
+
+
+
 
                                 <End onEnded={() => this.setState({ user: user , lobby: lobby })} />
-                                <Box>
+                                <Box
+                                    // as="button"
+                                    // p={4}
+                                    // // color="white"
+                                    // fontWeight="bold"
+                                    // borderRadius="md"
+                                    // bgGradient="linear(to-r, teal.500,green.500)"
+                                    // _hover={{
+                                    //     bgGradient: "linear(to-r, red.500, yellow.500)",
+                                    // }}
+                                >
+
                                     <LeaveLobby onLeftLobby={() => this.setState({user: user, lobby: null })} />
                                 </Box>
                             </Box>
@@ -231,15 +267,16 @@ class App extends React.Component<AppProps, AppState> {
                     </Box>
 
                     <Box
-                        as="button"
-                        p={4}
-                        color="white"
-                        fontWeight="bold"
-                        borderRadius="md"
-                        bgGradient="linear(to-r, teal.500,green.500)"
-                        _hover={{
-                            bgGradient: "linear(to-r, red.500, yellow.500)",
-                        }}>
+                         // as="button"
+                         // p={4}
+                         // // color="white"
+                         // fontWeight="bold"
+                         // borderRadius="md"
+                         // bgGradient="linear(to-r, teal.500,green.500)"
+                         // _hover={{
+                         //     bgGradient: "linear(to-r, red.500, yellow.500)",
+                         // }}
+                        >
                         <Logout onLoggedOut={() => this.setState({ user: null, lobby: null })} />
                     </Box>
                 </Box>

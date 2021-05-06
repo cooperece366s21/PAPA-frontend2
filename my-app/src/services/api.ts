@@ -120,7 +120,7 @@ export type Restaurant = {
     price: string | null;
     rating: string | null;
     address: string;
-    cuisines: Cuisine[];
+    cuisine: string[];
     phoneNumber: string;
 }
 
