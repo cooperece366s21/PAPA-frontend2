@@ -9,9 +9,9 @@ import { Start } from "../Lobby/Start";
 import { End } from "../Lobby/End";
 import { Logout } from "../Logout/Logout";
 import { Preference} from "../Preferences/Preference";
+
 import { extendTheme } from "@chakra-ui/react"
 
-// import { UserFeed } from "../Feed/Feed";
 import {
     Box,
     Heading,
@@ -25,6 +25,25 @@ import {
     useColorModeValue,
     Container
 } from "@chakra-ui/react";
+
+// const theme = extendTheme({
+//     textStyles: {
+//         h1: {
+//             // you can also use responsive styles
+//             fontSize: ["48px", "72px"],
+//             fontWeight: "bold",
+//             lineHeight: "110%",
+//             letterSpacing: "-2%",
+//         },
+//         h2: {
+//             fontSize: ["36px", "48px"],
+//             fontWeight: "semibold",
+//             lineHeight: "110%",
+//             letterSpacing: "-1%",
+//         },
+//     },
+// })
+
 import {LobbyFeed} from "../Lobby/LobbyFeed";
 import {Like} from "../Preferences/Like";
 import {Dislike} from "../Preferences/Dislike";
@@ -56,16 +75,31 @@ class App extends React.Component<AppProps, AppState> {
     // const { lobbyHost } = this.state;
     const { lobby } = this.state;
     return (
- // bgGradient="radial(gray.300,yellow.400,pink.200)" w="100%" h ="2000px"
-         <Box className="App" >
+      //   w="100%"
+      // h ="2000px"
+      // bgGradient="linear(red.600 2%, orange.400 10%, yellow.300 50%)"
+
+            // bgGradient="radial(gray.300,yellow.400,pink.200)" w="100%" h ="2000px"
+ //         <Box>
+ //
+ //         </Box>
+         <Box className="App"
+             w="100%"
+             h="2000px"
+             bgGradient="linear(red.600 0%, orange.400 5%, yellow.300 20%)"
+
+         >
             {/*<Heading>*/}
             {/*    <link*/}
             {/*        href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"*/}
             {/*        rel="stylesheet"*/}
             {/*    />*/}
             {/*</Heading>*/}
+            {/*inear(red.600 2%, orange.400 10%, yellow.300 50%)"*/}
+            {/* w="100%"*/}
+            {/* h="200px"*/}
 
-            <Container maxW={'3xl'}>
+             <Container maxW={'3xl'}>
                 <Stack
                     as={Box}
                     textAlign={'center'}
@@ -74,10 +108,13 @@ class App extends React.Component<AppProps, AppState> {
                     <Heading
                         fontWeight={400}
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
+                        // fontFamily={"Raleway"}
+
                         lineHeight={'110%'}>
                         Welcome to PAPA! <br />
                         <Text as={'span'} color={'green.400'}>
                             {/*fontWeight={400}*/}
+                            {/*fontFamily={"Raleway"}*/}
                             PAPA Will Help You Decide!
                         </Text>
                     </Heading>
@@ -193,7 +230,16 @@ class App extends React.Component<AppProps, AppState> {
 
                     </Box>
 
-                    <Box>
+                    <Box
+                        as="button"
+                        p={4}
+                        color="white"
+                        fontWeight="bold"
+                        borderRadius="md"
+                        bgGradient="linear(to-r, teal.500,green.500)"
+                        _hover={{
+                            bgGradient: "linear(to-r, red.500, yellow.500)",
+                        }}>
                         <Logout onLoggedOut={() => this.setState({ user: null, lobby: null })} />
                     </Box>
                 </Box>

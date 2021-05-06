@@ -113,40 +113,6 @@ export class CreateLobby extends React.Component<LobbyProps, LobbyJoinState> {
                     </Box>
                 </Box>
             </Flex>
-            // <Box>
-            //     <form onSubmit={e => e.preventDefault()}>
-            //         {lobbyResponse && (
-            //             <Heading as="h2" size="2xl">
-            //                 {this.state.lobbyResponse}
-            //             </Heading>
-            //         )}
-            //         <FormControl id="location" isRequired>
-            //             <FormLabel>Location</FormLabel>
-            //             <Input
-            //                 type=""
-            //                 value={this.state.location}
-            //                 onChange={e => this.setState({ location: e.currentTarget.value })}
-            //             />
-            //         </FormControl>
-            //
-            //         <FormControl id="Keyword">
-            //             <FormLabel>Keyword</FormLabel>
-            //             <Input
-            //                 type=""
-            //                 value={this.state.keyword}
-            //                 onChange={e => this.setState({ keyword: e.currentTarget.value })}
-            //             />
-            //         </FormControl>
-            //
-            //         <Button
-            //             type="submit"
-            //             isLoading={this.state.loading}
-            //             onClick={() => this.onSubmit()}
-            //         >
-            //             Enter
-            //         </Button>
-            //     </form>
-            // </Box>
         );
     }
 }

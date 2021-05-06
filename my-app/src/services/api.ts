@@ -40,11 +40,6 @@ function setCurrentLobby(lobby: Lobby): void {
     localStorage.setItem("papalobby", lobby.ID);
 }
 
-//not sure if we want the resturant list in local storage but this might be complicated to do
-// function setLobbyList(lobby: Lobby): void {
-//     localStorage.setItem("papalobbylist", lobby.restaurant_maps);
-// }
-
 async function getCurrentLobby(): Promise<Lobby | null> {
 
     let lobbyID = getCurrentLobbyId();
@@ -124,29 +119,11 @@ export type Restaurant = {
     displayPhone: string | null;
     price: string | null;
     rating: string | null;
-    address: Address;
+    address: string;
     cuisines: Cuisine[];
     phoneNumber: string;
 }
 
-// export type Info = {
-//     ID: string;
-//     alias: string;
-//     name: string;
-//     isOpenNow: boolean;
-//     displayPhone: string;
-//     price: string;
-//     rating: string;
-//     address: Address;
-//     cuisines: Cuisine[];
-//     phoneNumber: string;
-//
-//     //NOT SURE HOW TO DO THE REST
-//     // Cuisine cuisine();
-//     // Address address();
-//     // PhoneNumber phoneNumber();
-//     // OperatingHours operatingHours();
-// }
 
 export type Cuisine = {
     alias: string;
@@ -165,29 +142,6 @@ export type Address = {
     cross_streets: string;
 
 }
-
-
-//
-// export type Feed = {
-//     shelves: Shelf[];
-// };
-//
-// export type Shelf = {
-//     title: String;
-//     shelfItems: Content[];
-// };
-
-// export type Content = {
-//     id: string;
-//     title: string;
-//     thumbnail: string | null;
-//     distributorId: string | null;
-//     genre: string;
-//     rating: {
-//         value: string;
-//     } | null;
-// };
-
 
 export function GetUserList(): Promise<String[]> {
     let lobbyID = getCurrentLobbyId();
@@ -210,8 +164,6 @@ export function GetUserList(): Promise<String[]> {
         });
 }
 
-
-//might need to change this back to string
 export function GetRestaurantList(): Promise<Restaurant[]> {
     let lobbyID = getCurrentLobbyId();
     let restID = getCurrentRestaurantId();
@@ -234,14 +186,13 @@ export function GetRestaurantList(): Promise<Restaurant[]> {
         });
 }
 
-export function GetRestaurantInfo(restID: string|null): Promise<string> {
+export function GetUrls(): Promise<string[]> {
     let lobbyID = getCurrentLobbyId();
     //let restID = getCurrentRestaurantId();
     // let lobbyID = "code1"
-    return fetch(`${BACKEND_URL}/${restID}/info`, {
+    return fetch(`${BACKEND_URL}/${lobbyID}/image_url_list`, {
         headers: {
             papalobby: lobbyID
-            //papacurrentrest: restID
         }
 
     })
@@ -256,8 +207,6 @@ export function GetRestaurantInfo(restID: string|null): Promise<string> {
             throw new Error("something went wrong loading the restaurant info" + err.message);
         });
 }
-
-
 
 export function getLobbyFeed(): Promise<Feed> {
     let lobbyID = getCurrentLobbyId();
@@ -279,26 +228,6 @@ export function getLobbyFeed(): Promise<Feed> {
             throw new Error("something went wrong loading the lobby feed" + err.message);
         });
 }
-
-// export function getFeed(): Promise<Feed> {
-//     let userId = getCurrentUserId();
-//
-//     return fetch(`${BACKEND_URL}/user/${userId}/feed`, {
-//         headers: {
-//             papauser: userId
-//         }
-//     })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error("not logged in");
-//             } else {
-//                 return response.json();
-//             }
-//         })
-//         .catch(err => {
-//             throw new Error("something went wrong loading feed" + err.message);
-//         });
-// }
 
 export type Result<T> =
     | {
@@ -487,8 +416,7 @@ export async function Dislike() {
 let exports = {
     getCurrentUser,
     GetUserList,
-    GetRestaurantInfo,
-    //getFeed,
+    GetUrls,
     getLobbyFeed,
     GetRestaurantList,
     getCurrentLobby,

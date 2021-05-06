@@ -57,18 +57,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
         const user = await api.SignUp(username, password);
 
-        // if (result.status === "success") {
-        //     onLoggedIn(result.value);
-        // } else {
-        //     this.setState({ loginResponse: result.error });
-        // }
-
-        // <Heading as="h2" size="1xl">
-        //     Great you have signed up {username}! Please sign in above!
-        // </Heading>
         this.setState({ loading: false, signUpUser: true });
-        //
-        //this.setState({ loading: false, signUpUser: user });
 
     }
 
@@ -150,56 +139,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     </Box>
                 </Box>
             </Flex>
-            // <Box>
-            //     <form onSubmit={e => e.preventDefault()}>
-            //         {loginResponse && (
-            //             <Heading as="h2" size="2xl">
-            //                 {this.state.loginResponse}
-            //             </Heading>
-            //         )}
-            //         <FormControl id="username" isRequired>
-            //             <FormLabel>Username</FormLabel>
-            //             <Input
-            //                 type=""
-            //                 value={this.state.username}
-            //                 onChange={e => this.setState({ username: e.currentTarget.value })}
-            //             />
-            //         </FormControl>
-            //         <FormControl id="password" isRequired>
-            //             <FormLabel>Password</FormLabel>
-            //             <Input
-            //                 type="password"
-            //                 value={this.state.password}
-            //                 onChange={e => this.setState({ password: e.currentTarget.value })}
-            //             />
-            //         </FormControl>
-            //         <Button
-            //             type="submit"
-            //             // isLoading={this.state.loading}
-            //             onClick={() => this.onSubmit()}
-            //         >
-            //             Sign in
-            //         </Button>
-            //
-            //         <Box>
-            //             <Button
-            //                 type="submit"
-            //                 //isLoading={this.state.loading}
-            //                 onClick={() => this.onSubmitSignUp()}
-            //             >
-            //                 Sign up
-            //             </Button>
-            //
-            //             <Box>
-            //                 <Heading as="h2" size="1xl">
-            //                     {this.state.signUpUser && (<Heading as="h2" size="1xl">Great you have signed up, {this.state.username}! Please sign in above!</Heading>)}
-            //                 </Heading>
-            //             </Box>
-            //
-            //         </Box>
-            //
-            //     </form>
-            // </Box>
         );
     }
 }
