@@ -163,13 +163,13 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                                         fontWeight="semibold"
                                         as="h4"
                                         lineHeight="tight"
-                                        isTruncated
+                                        //isTruncated
                                     >
 
 
                                         <Accordion allowMultiple>
 
-                                            <AccordionItem >
+                                            <AccordionItem p="6">
                                                 {({ isExpanded }) => (
                                                     <>
                                                         <h2>
@@ -226,63 +226,6 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                                 </Box>
                             </Box>
                         </Center>)}
-
-
-
-
-
-
-
-
-
-
-
-
-{/*
-                    <Box boxSize="sm">
-                        {feed && feed.length > this.props.currentIdx &&  (
-                            <Image boxSize="450px" src= {urls ? urls[this.props.currentIdx]:"https://hpc.cimne.upc.edu/wp-content/uploads/2013/04/done.gif"} />)}
-                    </Box>
-                    </Center>
-                    <Center height="150px">
-                        <Divider orientation="horizontal" />
-                    </Center>
-
-
-                    <Accordion allowMultiple>
-
-                        <AccordionItem >
-                            {({ isExpanded }) => (
-                                <>
-                                    <h2>
-                                        <AccordionButton fontSize="50px">
-                                            <Box flex="1" textAlign="left" fontSize="50px">
-                                                {feed && feed.length > this.props.currentIdx && (feed[this.props.currentIdx].name)}
-                                            </Box>
-                                            {isExpanded ? (
-                                                <MinusIcon fontSize="12px" />
-                                            ) : (
-                                                <AddIcon fontSize="12px" />
-                                            )}
-                                        </AccordionButton>
-                                    </h2>
-                                    <AccordionPanel pb={4} fontSize="35px">
-                                        Phone Number: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].displayPhone}
-                                        <Divider />
-                                        Price: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].price}
-                                        <Divider />
-                                        Rating: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].rating}
-                                        <Divider />
-                                        Address: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].address}
-                                    </AccordionPanel>
-                                </>
-                            )}
-                        </AccordionItem>
-                    </Accordion>*/}
-
-
-
-
 
 
 

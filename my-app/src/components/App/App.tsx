@@ -109,10 +109,10 @@ class App extends React.Component<AppProps, AppState> {
                         fontWeight={400}
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                         // fontFamily={"Raleway"}
-
+                        color={'green.900'}
                         lineHeight={'110%'}>
                         Welcome to PAPA! <br />
-                        <Text as={'span'} color={'green.400'}>
+                        <Text as={'span'} color={'green.900'}>
                             {/*fontWeight={400}*/}
                             {/*fontFamily={"Raleway"}*/}
                             PAPA Will Help You Decide!
@@ -141,7 +141,7 @@ class App extends React.Component<AppProps, AppState> {
                                 fontWeight={400}
                                 fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                                 lineHeight={'110%'}>
-                                Hello <Box color='#f00' fontWeight="extrabold">{user.name}</Box>, join or create a lobby!
+                                Hello <Box color='green.600' fontWeight="extrabold" fontSize="6xl"> {user.name}</Box>Join or create a lobby!
                                 {/*<Text as={'span'} color={'green.400'}>*/}
                                 {/*    /!*fontWeight={400}*!/*/}
                                 {/*    Hello {user.name}, join or create a lobby!*/}
@@ -165,7 +165,7 @@ class App extends React.Component<AppProps, AppState> {
                                     fontWeight="extrabold"
                                     textAlign={'left'}
                                 >
-                                    Welcome to lobby with code: {lobby.code}<br/>
+                                    Welcome to lobby with code: <Box color='green.600' fontWeight="extrabold" fontSize="6xl"> {lobby.code}</Box><br/>
                                 </Text>
                                 {/*<span>Welcome to lobby with code: {lobby.code}<br/></span>*/}
                                 {/*<span>Please click on start when everyone is ready!</span>*/}
