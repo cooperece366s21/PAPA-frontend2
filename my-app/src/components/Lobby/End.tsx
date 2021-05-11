@@ -34,18 +34,11 @@ export class End extends React.Component<EndProps, EndState>{
                         bgClip: "text",
                         bgGradient: "linear(to-l, #7928CA,#FF0080)"
 
-                        // background:
-                        //
-                        //     linear-gradient(to bottom, #fff, #bbb) content-box,
-                        //
-                        // linear-gradient(to right, #e94332, #a91302) padding-box,
-                        //
-                        // linear-gradient(to right, #0867a6, #4aa9e8) border-box;"
                     }}
 
                 >
                     Get Recommendation
-                    {/*<ArrowRightIcon w={3} h={3} color="red.500" />*/}
+
 
                 </Button>
 
@@ -58,10 +51,7 @@ export class End extends React.Component<EndProps, EndState>{
 
                 <Box>
                     <Heading as="h2" size="2xl">
-                        {/*{recommendation?.address.address1}*/}
-                        {/*{recommendation?.address.address2}*/}
-                        {/*{recommendation?.address.address3}*/}
-                        {/*{recommendation?.address.address1}*/}
+
                     </Heading>
                 </Box>
             </VStack>

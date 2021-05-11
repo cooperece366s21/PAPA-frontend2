@@ -39,34 +39,21 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
     };
 
     componentDidUpdate() {
-        //console.log(this.state.feed ? this.state.feed[this.props.currentIdx]:null)
-        api.setCurrentRestaurant((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
-        //api.GetUserList();
-        //api.GetRestaurantInfo((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
-        // this.setState({users: users, info: info });
 
-        // setInterval(async ()=>{
-        //     const users = await api.GetUserList();
-        //     this.setState({users: users});
-        // },2000)
+        api.setCurrentRestaurant((this.state.feed && this.state.feed.length > this.props.currentIdx) ? this.state.feed[this.props.currentIdx].ID:null);
+
     }
 
     async componentDidMount() {
-        // const feed = await api.GetRestaurantList();
         const feed = await api.GetRestaurantList();
         const users = await api.GetUserList();
         const urls = await  api.GetUrls();
 
-        //console.log(feed)
-        // debugger;
+
         this.setState({ feed: feed, users: users, urls: urls});
 
         api.setCurrentRestaurant((feed && feed.length > this.props.currentIdx) ? feed[this.props.currentIdx].ID:null);
     }
-
-    // async  onSelected() {
-    //     this.state()
-    // }
 
     render() {
 
@@ -75,45 +62,10 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
         const { urls } = this.state;
         const address = (feed && feed.length > this.props.currentIdx && JSON.parse(feed[this.props.currentIdx].address));
 
-        //const info = api.GetRestaurantInfo((feed && feed.length > this.props.currentIdx) ? feed[this.props.currentIdx].ID:null);
-        // const split1 = info?.split("image_url");
-        // const url = split1[1].split(":\");
-        // if (feed == null){
-        //     const { restaurant } = null;
-        // } else {
-        //     const { restaurant } = feed[this.props.currentIdx];
-        // }
-        // const { restaurant } = feed?[this.props.currentIdx];
-        // debugger;
-        // api.setCurrentRestaurant(feed ? feed[this.props.currentIdx].id:null);
 
         return (
             <VStack>
 
-                {/*<Text*/}
-                {/*    // bgGradient="linear(to-l, #7928CA,#FF0080)"*/}
-                {/*    color="black.300"*/}
-                {/*    // bgClip="text"*/}
-                {/*    fontSize="3xl"*/}
-                {/*    fontWeight="extrabold"*/}
-                {/*    textAlign={'right'}*/}
-                {/*>*/}
-                {/*    The list of users in the lobby:*/}
-                {/*</Text>*/}
-                {/* {users?.map((string, idx) => (*/}
-                {/*     <Box key={idx}>*/}
-                {/*         <Text*/}
-                {/*             // bgGradient="linear(to-l, #7928CA,#FF0080)"*/}
-                {/*             color="black.300"*/}
-                {/*             // bgClip="text"*/}
-                {/*             fontSize="2xl"*/}
-                {/*             fontWeight="extrabold"*/}
-                {/*             textAlign={'right'}*/}
-                {/*         >*/}
-                {/*            <span>{users[idx]}</span>*/}
-                {/*         </Text>*/}
-                {/*     </Box>*/}
-                {/*))}*/}
 
                 <Box>
                     <Center>
@@ -128,19 +80,11 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                             Please Like or Dislike
                         </Text>)}
                     </Center>
-                {/*    <Center>*/}
-
-
-
-
-
-
 
                     {feed && feed.length > this.props.currentIdx && (<Center>
                             <Box maxW="lg" borderWidth="1px" borderRadius="lg" overflow="hidden">
                                 {feed && feed.length > this.props.currentIdx &&  (
                                     <Image boxSize="450px" src= {urls ? urls[this.props.currentIdx]:"https://hpc.cimne.upc.edu/wp-content/uploads/2013/04/done.gif"} />)}
-                             {/*   <Image src={property.imageUrl} alt={property.imageAlt} />*/}
 
                                 <Box p="6">
                                     <Box d="flex" alignItems="baseline">
@@ -189,8 +133,7 @@ export class LobbyFeed extends React.Component<FeedProps, FeedState> {
                                                             </AccordionButton>
                                                         </h2>
                                                         <AccordionPanel pb={4} >
-                                                            {/*Cuisine: {feed && feed.length > this.props.currentIdx && (JSON.parse(feed[this.props.currentIdx].cuisine[0]))}*/}
-                                                            {/*<Divider />*/}
+
                                                             Price: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].price}
                                                             <Divider />
                                                             Rating: {feed && feed.length > this.props.currentIdx && feed[this.props.currentIdx].rating}

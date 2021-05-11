@@ -6,11 +6,9 @@ import {
     FormLabel,
     Heading,
     Input,
-    InputGroup,
-    InputRightElement
 } from "@chakra-ui/react";
 import React from "react";
-// import api, { User } from "../../services/api";
+
 import api, { Lobby } from "../../services/api";
 
 type LobbyProps = { onEnterLobby: (lobby: Lobby) => void };
@@ -40,7 +38,6 @@ export class CreateLobby extends React.Component<LobbyProps, LobbyJoinState> {
         const { location } = this.state;
         const { keyword } = this.state;
 
-        //const result = await api.JoinLobby(location);
         const result = await api.CreateLobby(location,keyword);
 
         if (result.status === "success") {

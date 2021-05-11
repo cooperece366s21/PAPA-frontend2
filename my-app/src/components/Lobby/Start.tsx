@@ -1,5 +1,4 @@
 import { Button } from "@chakra-ui/react";
-import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons'
 import React from "react";
 import api from "../../services/api";
 
@@ -19,7 +18,6 @@ export class Start extends React.Component<StartProps, StartState>{
                 type="submit"
                 >
                 Start Lobby
-                {/*<ArrowRightIcon w={3} h={3} color="red.500" />*/}
 
             </Button>
         );

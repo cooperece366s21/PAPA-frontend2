@@ -6,11 +6,9 @@ import {
     FormLabel,
     Heading,
     Input,
-    InputGroup,
-    InputRightElement
 } from "@chakra-ui/react";
 import React from "react";
-// import api, { User } from "../../services/api";
+
 import api, { Lobby } from "../../services/api";
 
 type LobbyProps = { onEnterLobby: (lobby: Lobby) => void };

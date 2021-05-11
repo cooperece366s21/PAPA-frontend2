@@ -20,7 +20,7 @@ type LoginState = {
     loginResponse: string | null;
     loading: boolean;
     signUpUser: boolean;
-    //signUpUser: User;
+
 };
 
 export class Login extends React.Component<LoginProps, LoginState> {
@@ -52,7 +52,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
     async onSubmitSignUp() {
         this.setState({ loading: true });
 
-        //const { onLoggedIn } = this.props;
         const { username, password } = this.state;
 
         const user = await api.SignUp(username, password);
@@ -63,7 +62,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
     render() {
         const { loginResponse } = this.state;
-        //const { signUpUser } = this.state;
 
         return (
 
