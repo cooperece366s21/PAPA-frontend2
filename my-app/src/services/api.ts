@@ -145,8 +145,7 @@ export type Address = {
 
 export function GetUserList(): Promise<String[]> {
     let lobbyID = getCurrentLobbyId();
-    //let restID = getCurrentRestaurantId();
-    // let lobbyID = "code1"
+
     return fetch(`${BACKEND_URL}/${lobbyID}/getLobbyUsers`, {
         headers: {
             papalobby: lobbyID
@@ -188,8 +187,7 @@ export function GetRestaurantList(): Promise<Restaurant[]> {
 
 export function GetUrls(): Promise<string[]> {
     let lobbyID = getCurrentLobbyId();
-    //let restID = getCurrentRestaurantId();
-    // let lobbyID = "code1"
+
     return fetch(`${BACKEND_URL}/${lobbyID}/image_url_list`, {
         headers: {
             papalobby: lobbyID
@@ -254,8 +252,6 @@ export async function SignUp(
 
     if (response.ok) {
         let user: User = await response.json();
-
-        //setCurrentUser(user);
 
         return { value: user, status: "success" };
     } else {
@@ -381,9 +377,7 @@ export async function Like() {
     let userID = getCurrentUserId();
     // debugger;
     let restID = getCurrentRestaurantId();
-    // let lobbyID = "code1";
-    // let userID = "Pablo";
-    //let restID = "panya-bakery-new-york";
+
     await fetch(`${BACKEND_URL}/${userID}/${lobbyID}/${restID}/like`, {
         method: "POST",
         headers: {
